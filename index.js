@@ -1,5 +1,6 @@
 const express = require("express")
 require("dotenv").config()
+const cors = require("cors")
 const { dbConnection } = require("./DB/config")
 //console.log(process.env);
 
@@ -8,6 +9,9 @@ const app = express()
 
 //import db connection
 dbConnection();
+
+// CORS
+app.use(cors())
 
 //public directory
 app.use(express.static("public"))
@@ -18,6 +22,7 @@ app.use(express.json())
 //create a route
 //TODO: auth // create,login, renewToken
 app.use("/api/auth", require("./routes/auth"))
+app.use("/api/events", require("./routes/events"))
 //TODO: CRUD: Events
 
 
